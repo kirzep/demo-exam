@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}Список заказов{% endblock %}
+{% block content %}
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <h2>Список заказов</h2>
+    {% if user.role == 'admin' %}
+        <a href="{% url 'orders:order_create' %}" class="btn-primary">+ Новый заказ</a>
+    {% endif %}
+</div>
+
+<table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+    <tr style="background-color: #f2f2f2; border-bottom: 2px solid #ddd;">
+        <th style="padding: 10px; text-align: left;">Номер</th>
+        <th style="padding: 10px; text-align: left;">Дата заказа</th>
+        <th style="padding: 10px; text-align: left;">Статус</th>
+        <th style="padding: 10px; text-align: left;">Клиент</th>
+        {% if user.role == 'admin' %}
+            <th style="padding: 10px; text-align: left;">Действия</th>
+        {% endif %}
+    </tr>
+    {% for order in orders %}
+    <tr style="border-bottom: 1px solid #ddd;">
+        <td style="padding: 10px;">{{ order.order_number }}</td>
+        <td style="padding: 10px;">{{ order.date_created }}</td>
+        <td style="padding: 10px;">{{ order.status }}</td>
+        <td style="padding: 10px;">{{ order.client.last_name }} {{ order.client.first_name }}</td>
+        {% if user.role == 'admin' %}
+        <td style="padding: 10px;">
+            <a href="{% url 'orders:order_update' order.pk %}" style="color: #f0ad4e; font-weight: bold; margin-right: 10px; text-decoration: none;">Ред.</a>
+            <a href="{% url 'orders:order_delete' order.pk %}" style="color: red; font-weight: bold; text-decoration: none;">Удалить</a>
+        </td>
+        {% endif %}
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

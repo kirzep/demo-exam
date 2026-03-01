@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Обувь для всех{% endblock %}</title>
+    
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="icon" href="{% static 'images/Icon.ico' %}" type="image/x-icon">
+    
+</head>
+<body style="font-family: 'Times New Roman', Times, serif; margin: 0; padding: 0; background-color: #FFFFFF;">
+    <header class="header" style="display: flex; justify-content: space-between; align-items: center; padding: 15px; background-color: #7FFF00;">
+        <div style="display: flex; align-items: center; gap: 15px;">
+            <img src="{% static 'images/Icon.png' %}" alt="Логотип" height="50">
+            <h1 style="margin: 0;">Обувь для всех</h1>
+        </div>
+        
+        <div style="display: flex; align-items: center;">
+            {% if user.is_authenticated %}
+                <span>{{ user.last_name }} {{ user.first_name }} ({{ user.get_role_display }})</span>
+                
+                {% if user.role == 'admin' or user.role == 'manager' %}
+                    <a href="{% url 'orders:order_list' %}" class="btn-primary" style="margin-left: 15px;">Заказы</a>
+                {% endif %}
+
+                <form action="{% url 'logout' %}" method="post" style="display:inline; margin-left: 15px;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-primary">Выйти</button>
+                </form>
+            {% else %}
+                <span>Гость</span>
+                <a href="{% url 'root_login' %}" class="btn-primary" style="margin-left: 15px;">Войти</a>
+            {% endif %}
+        </div>
+    </header>
+
+    <main style="padding: 20px;">
+        
+        {% if messages %}
+            <div style="margin-bottom: 20px;">
+                {% for message in messages %}
+                    <div class="msg {% if message.tags %}{{ message.tags }}{% else %}info{% endif %}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% block content %}{% endblock %}
+        
+    </main>
+
+    <footer class="footer" style="padding: 15px; text-align: center; margin-top: 40px; background-color: #7FFF00;">
+        <p>&copy; 2026 Компания по продаже обуви</p>
+    </footer>
+</body>
+</html>

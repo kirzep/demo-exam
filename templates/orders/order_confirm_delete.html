@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Удаление заказа{% endblock %}
+{% block content %}
+<div style="max-width: 600px; margin: 0 auto; text-align: center; background: #ffcccc; padding: 20px; border-radius: 5px; border: 1px solid red;">
+    <h2>Удалить заказ №{{ order.order_number }}?</h2>
+    <form method="post" style="margin-top: 20px;">
+        {% csrf_token %}
+        <button type="submit" class="btn-primary" style="background-color: #d9534f; color: white;">Да, удалить</button>
+        <a href="{% url 'orders:order_list' %}" class="btn-primary" style="background-color: #ccc; margin-left: 10px;">Отмена</a>
+    </form>
+</div>
+{% endblock %}

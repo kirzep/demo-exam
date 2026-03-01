@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Авторизация{% endblock %}
+
+{% block content %}
+<div style="max-width: 400px; margin: 0 auto; text-align: center;">
+    <h2>Вход в систему</h2>
+    <form method="post" style="display: flex; flex-direction: column; gap: 15px;">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn-primary">Войти</button>
+    </form>
+    <br>
+    <a href="{% url 'products:product_list' %}" class="btn-primary" style="display: inline-block;">Продолжить как гость</a>
+</div>
+{% endblock %}

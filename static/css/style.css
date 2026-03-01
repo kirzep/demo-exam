@@ -1,0 +1,54 @@
+body {
+    font-family: 'Times New Roman', Times, serif; 
+    background-color: #FFFFFF; /* Основной фон [cite: 679, 681] */
+    margin: 0;
+    padding: 0;
+}
+
+.header, .footer, .sidebar {
+    background-color: #7FFF00; 
+}
+
+.btn-primary, a.accent {
+    background-color: #00FA9A;
+    color: black;
+    text-decoration: none;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+}
+
+.product-card.high-discount {
+    background-color: #2E8B57;
+    color: white; 
+}
+
+.product-card.out-of-stock {
+    background-color: lightblue;
+}
+
+.old-price {
+    text-decoration: line-through;
+    color: red;
+}
+.new-price {
+    color: black;
+}
+
+.msg {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+.msg.error {
+    background-color: #ffcccc;
+    border: 1px solid red;
+}
+.msg.success {
+    background-color: #ccffcc;
+    border: 1px solid green;
+}
+.msg.info {
+    background-color: #e5e5e5;
+    border: 1px solid gray;
+}

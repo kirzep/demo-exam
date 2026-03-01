@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Удаление товара{% endblock %}
+
+{% block content %}
+<div style="max-width: 600px; margin: 0 auto; text-align: center; background: #ffcccc; padding: 20px; border-radius: 5px; border: 1px solid red;">
+    <h2>Вы уверены, что хотите удалить товар?</h2>
+    <p><strong>{{ product.article }} - {{ product.name }}</strong></p>
+    
+    <form method="post" style="margin-top: 20px;">
+        {% csrf_token %}
+        <button type="submit" class="btn-primary" style="background-color: #d9534f; color: white;">Да, удалить безвозвратно</button>
+        <a href="{% url 'products:product_list' %}" class="btn-primary" style="background-color: #ccc; margin-left: 10px;">Отмена</a>
+    </form>
+</div>
+{% endblock %}
